@@ -27,7 +27,6 @@ const update = async (id: string, fieldsToUpdate: Partial<IHero>) => {
 
 const remove = async (id: string) => {
   const result = await Hero.findByIdAndDelete(id);
-  console.log(result);
 
   return result;
 };
