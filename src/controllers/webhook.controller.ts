@@ -4,6 +4,8 @@ import { spawn } from "child_process";
 const listen = async (req: Request, res: Response) => {
   const payload = req.body;
 
+  console.log("Listen for updates");
+
   if (payload && payload.ref === "refs/heads/master") {
     console.log("Received a push event to the master branch. Deploying...");
     const deployScriptPath = "/home/ec2-user/deploy.sh";
