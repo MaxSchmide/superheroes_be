@@ -1,7 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import heroRouter from "./routes/heroRouter";
+import heroRouter from "./routes/hero.router";
 import { corsOptions } from "./utils/corsOptions";
 import { mongooseConnect } from "./utils/db";
 
