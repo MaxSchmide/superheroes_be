@@ -14,7 +14,7 @@ mongooseConnect();
 
 app.use(cors({ origin: "" })).use(express.json());
 
-app.get("/", (_, res) => res.status(200).send("One more test"));
+app.get("/", (_, res) => res.status(200).send("Hello from the other side"));
 
 app.post("/webhook", webhookController.listen);
 
