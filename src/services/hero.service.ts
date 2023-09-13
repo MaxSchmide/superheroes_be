@@ -6,7 +6,7 @@ type Params = {
   perPage: string;
 };
 
-const getAll = async ({ page, perPage }: Params) => {
+const read = async ({ page, perPage }: Params) => {
   const offset = +perPage * (+page - 1);
   const heroes = await Hero.find().skip(offset).limit(+perPage);
 
@@ -19,4 +19,17 @@ const create = async (data: IHero) => {
   return newHero;
 };
 
-export default { getAll, create };
+const update = async (id: string, fieldsToUpdate: Partial<IHero>) => {
+  const updatedHero = await Hero.findByIdAndUpdate(id, fieldsToUpdate);
+
+  return updatedHero;
+};
+
+const remove = async (id: string) => {
+  const result = await Hero.findByIdAndDelete(id);
+  console.log(result);
+
+  return result;
+};
+
+export default { read, create, update, remove };

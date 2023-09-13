@@ -3,7 +3,8 @@ import heroController from "../controllers/hero.controller";
 
 const router = express.Router();
 
-router.get("/", heroController.getAll);
+router.get("/", heroController.read);
 router.post("/", heroController.create);
-
+router.put("/:id", heroController.update);
+router.delete("/:id", heroController.remove);
 export default router;
