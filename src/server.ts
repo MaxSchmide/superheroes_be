@@ -12,7 +12,7 @@ export const app = express();
 
 mongooseConnect();
 
-app.use(cors({ origin: "" })).use(express.json());
+app.use(cors({ origin: "http://localhost:5173" })).use(express.json());
 
 app.get("/", (_, res) => res.status(200).send("Server"));
 
