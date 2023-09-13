@@ -14,8 +14,6 @@ const read = async ({ page, perPage }: Params) => {
 };
 
 const create = async (data: Partial<IHero>) => {
-  const { images } = data;
-
   const newHero = await Hero.create(data);
 
   return newHero;
