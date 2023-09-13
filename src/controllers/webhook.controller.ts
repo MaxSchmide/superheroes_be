@@ -6,7 +6,8 @@ const listen = async (req: Request, res: Response) => {
 
   if (payload && payload.ref === "refs/heads/master") {
     console.log("Received a push event to the master branch. Deploying...");
-    const deployProcess = spawn("bash", ["./deploy.sh"]);
+    const deployScriptPath = "/home/2ce-user/deploy.sh";
+    const deployProcess = spawn("bash", [deployScriptPath]);
     deployProcess.stdout.on("data", (data) => {
       console.log(`Deployment script stdout: ${data}`);
     });
