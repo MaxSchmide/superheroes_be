@@ -6,7 +6,7 @@ const whitelist = process.env.CLIENT_ORIGINS.split(",");
 export const corsOptions = {
   origin: (origin: string, callback: CorsCallback) => {
     if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
+      callback(null, origin);
     } else {
       callback(null, false);
     }
