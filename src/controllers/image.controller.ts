@@ -26,8 +26,8 @@ const upload = async (req: Request, res: Response) => {
     }
 
     res.status(201).send({ links });
-  } catch (error) {
-    res.status(500).send(error);
+  } catch (error: any) {
+    res.status(500).send({ message: error.message });
   }
 };
 
