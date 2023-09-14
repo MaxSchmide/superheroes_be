@@ -23,6 +23,22 @@ const read = async (req: Request, res: Response) => {
   }
 };
 
+const readOne = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const hero = await heroService.readOne(id);
+
+    if (hero) {
+      res.status(200).send(hero);
+    } else {
+      res.status(404).send("Not found");
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const create = async (req: Request, res: Response) => {
   try {
     const data = req.body;
@@ -68,4 +84,4 @@ const remove = async (req: Request, res: Response) => {
   }
 };
 
-export default { read, create, update, remove };
+export default { read, readOne, create, update, remove };
