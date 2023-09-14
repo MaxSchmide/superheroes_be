@@ -1,7 +1,7 @@
 import { CorsCallback } from "../types/CorsCallback";
 import "dotenv/config";
 
-const whitelist = process.env.CLIENT_ORIGINS.split(",");
+const whitelist = ["http://localhost:5173", "http://localhost:3000"];
 
 export const corsOptions = {
   origin: (origin: string, callback: CorsCallback) => {
