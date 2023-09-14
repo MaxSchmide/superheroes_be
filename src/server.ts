@@ -5,6 +5,7 @@ import imageController from "./controllers/image.controller";
 import webhookController from "./controllers/webhook.controller";
 import heroRouter from "./routes/hero.router";
 import { mongooseConnect } from "./utils/db";
+import { corsOptions } from "./utils/corsOptions";
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ export const app = express();
 
 mongooseConnect();
 
-app.use(cors({ origin: "" })).use(express.json());
+app.use(cors({ origin: "*" })).use(express.json());
 
 app.get("/", (_, res) => res.status(200).send("Server"));
 
