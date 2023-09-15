@@ -14,10 +14,8 @@ const read = async ({ page, perPage }: Params) => {
 
   const allHeroesCount = await Hero.find().count();
 
-  const totalPages = Math.ceil(allHeroesCount / perPage);
-
   return {
-    totalPages,
+    totalHeroes: allHeroesCount,
     heroes,
   };
 };
