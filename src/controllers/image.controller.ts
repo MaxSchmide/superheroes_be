@@ -1,34 +1,31 @@
 import { Request, Response } from "express";
 import multiparty from "multiparty";
 import amazonService from "../services/amazon.service";
+import { handleAsyncError } from "../utils/handleAsyncError";
 
-const upload = async (req: Request, res: Response) => {
-  try {
-    const form = new multiparty.Form();
+const handleUpload = async (req: Request, res: Response) => {
+  const form = new multiparty.Form();
 
-    const { files } = await new Promise<any>((resolve, reject) => {
-      form.parse(req, (err, _, files) => {
-        if (err) reject(err);
+  const { files } = await new Promise<any>((resolve, reject) => {
+    form.parse(req, (err, _, files) => {
+      if (err) reject(err);
 
-        resolve({ files });
-      });
+      resolve({ files });
     });
+  });
 
-    const links = [];
+  const links = [];
 
-    for (const file of files.file) {
-      const ext = file.originalFilename.trim().split(".").pop();
-      const newFilename = Date.now() + "." + ext;
+  for (const file of files.file) {
+    const ext = file.originalFilename.trim().split(".").pop();
+    const newFilename = Date.now() + "." + ext;
 
-      const link = await amazonService.uploadImage(file, newFilename);
+    const link = await amazonService.uploadImage(file, newFilename);
 
-      links.push(link);
-    }
-
-    res.status(201).send({ links });
-  } catch (error: any) {
-    res.status(500).send({ message: error.message });
+    links.push(link);
   }
+
+  res.status(201).send({ links });
 };
 
-export default { upload };
+export default { upload: handleAsyncError(handleUpload) };

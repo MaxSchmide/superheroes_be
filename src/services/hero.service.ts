@@ -2,41 +2,33 @@ import { Hero } from "../models/hero.model";
 import { IHero } from "../types/hero";
 
 type Params = {
-  page: string;
-  perPage: string;
+  page: number;
+  perPage: number;
 };
 
 const read = async ({ page, perPage }: Params) => {
-  const offset = +perPage * (+page - 1);
+  const offset = perPage * (page - 1);
   const heroes = await Hero.find({}, "nickname images")
     .skip(offset)
-    .limit(+perPage);
+    .limit(perPage);
 
-  return heroes;
+  const allHeroesCount = await Hero.find().count();
+
+  const totalPages = Math.ceil(allHeroesCount / perPage);
+
+  return {
+    totalPages,
+    data: heroes,
+  };
 };
 
-const readOne = async (id: string) => {
-  const hero = await Hero.findById(id);
+const readOne = (id: string) => Hero.findById(id);
 
-  return hero;
-};
+const create = (data: Partial<IHero>) => Hero.create(data);
 
-const create = async (data: Partial<IHero>) => {
-  const newHero = await Hero.create(data);
+const update = (id: string, fieldsToUpdate: Partial<IHero>) =>
+  Hero.findByIdAndUpdate(id, fieldsToUpdate);
 
-  return newHero;
-};
-
-const update = async (id: string, fieldsToUpdate: Partial<IHero>) => {
-  const updatedHero = await Hero.findByIdAndUpdate(id, fieldsToUpdate);
-
-  return updatedHero;
-};
-
-const remove = async (id: string) => {
-  const result = await Hero.findByIdAndDelete(id);
-
-  return result;
-};
+const remove = (id: string) => Hero.findByIdAndDelete(id);
 
 export default { read, readOne, create, update, remove };
