@@ -18,7 +18,7 @@ const read = async ({ page, perPage }: Params) => {
 
   return {
     totalPages,
-    data: heroes,
+    heroes,
   };
 };
 
