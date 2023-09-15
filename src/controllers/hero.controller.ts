@@ -63,7 +63,7 @@ const handleRemove = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(200).send("Successfully deleted");
+  res.status(204).send("Successfully deleted");
 };
 
 export default {
