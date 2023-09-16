@@ -11,8 +11,6 @@ describe("Delete hero", () => {
   var mockHero;
 
   before(async () => {
-    Hero.collection.drop();
-
     mockHero = await new Hero(hero);
 
     mockHero.save();
@@ -22,7 +20,7 @@ describe("Delete hero", () => {
 
   after((done) => {
     server.close(() => {
-      Hero.collection.drop();
+      Hero.findByIdAndDelete(mockHero._id);
       done();
     });
   });

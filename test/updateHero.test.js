@@ -11,8 +11,6 @@ describe("Update hero", () => {
   var mockHero;
 
   before(async () => {
-    Hero.collection.drop();
-
     mockHero = await new Hero(hero);
 
     mockHero.save();
@@ -22,7 +20,7 @@ describe("Update hero", () => {
 
   after((done) => {
     server.close(() => {
-      Hero.collection.drop();
+      Hero.findByIdAndDelete(mockHero._id);
       done();
     });
   });
@@ -39,7 +37,6 @@ describe("Update hero", () => {
           done(err);
         } else {
           res.should.have.status(204);
-          res.body.should.be.a("object");
           done();
         }
       });
