@@ -37,7 +37,7 @@ _Make sure you have environment variables set up for connecting to your database
 Your server uses AWS S3 for image uploads. You need to have an AWS S3 account set up with the appropriate access keys. Add these keys to the .env file in the project's root folder:
 
 ```dotenv
-S3_ACCESS_KEY_ID=Your_Access_Key
+S3_ACCESS_KEY=Your_Access_Key
 S3_SECRET_ACCESS_KEY=Your_Secret_Access_Key
 ```
 ## MongoDB Configuration
