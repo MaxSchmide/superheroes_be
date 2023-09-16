@@ -9,7 +9,7 @@ import { corsOptions } from "./utils/corsOptions";
 
 dotenv.config();
 
-export const app = express();
+const app = express();
 
 mongooseConnect();
 
@@ -22,3 +22,5 @@ app.post("/webhook", webhookController.listen);
 app.post("/images", imageController.upload);
 
 app.use("/heroes", heroRouter);
+
+export default app;

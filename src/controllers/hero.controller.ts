@@ -50,7 +50,11 @@ const handleUpdate = async (req: Request, res: Response) => {
 
   const updatedHero = await heroService.update(id, fieldsToUpdate);
 
-  res.status(204).send(updatedHero);
+  if (updatedHero) {
+    res.status(204).send(updatedHero);
+  } else {
+    res.status(404).send("Not found");
+  }
 };
 
 const handleRemove = async (req: Request, res: Response) => {
@@ -63,7 +67,7 @@ const handleRemove = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(204).send("Successfully deleted");
+  res.status(ц).send("Successfully deleted");
 };
 
 export default {
