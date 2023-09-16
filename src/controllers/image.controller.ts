@@ -28,4 +28,15 @@ const handleUpload = async (req: Request, res: Response) => {
   res.status(201).send({ links });
 };
 
-export default { upload: handleAsyncError(handleUpload) };
+const handleDelete = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  await amazonService.deleteImage(id);
+
+  res.status(204).send("Deleted");
+};
+
+export default {
+  upload: handleAsyncError(handleUpload),
+  delete: handleAsyncError(handleDelete),
+};

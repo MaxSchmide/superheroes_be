@@ -1,4 +1,4 @@
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { DeleteObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import "dotenv/config";
 import fs from "fs";
 import mime from "mime-types";
@@ -19,4 +19,12 @@ const uploadImage = async (file: any, filename: string) => {
   return link;
 };
 
-export default { uploadImage };
+const deleteImage = (doc: string) =>
+  client.send(
+    new DeleteObjectCommand({
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: doc,
+    })
+  );
+
+export default { uploadImage, deleteImage };

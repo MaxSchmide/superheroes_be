@@ -1,9 +1,9 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import imageController from "./controllers/image.controller";
 import webhookController from "./controllers/webhook.controller";
 import heroRouter from "./routes/hero.router";
+import imageRouter from "./routes/image.router";
 import { mongooseConnect } from "./utils/db";
 import { corsOptions } from "./utils/corsOptions";
 
@@ -19,8 +19,7 @@ app.get("/", (_, res) => res.status(200).send("Server"));
 
 app.post("/webhook", webhookController.listen);
 
-app.post("/images", imageController.upload);
-
 app.use("/heroes", heroRouter);
+app.use("/images", imageRouter);
 
 export default app;
